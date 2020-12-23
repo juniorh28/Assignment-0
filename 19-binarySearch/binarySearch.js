@@ -10,29 +10,30 @@ class MySolution {
     //if it less than the target go to the 1st half.
     //repeat until you find the target. If by the end of the search the target isn't found, return false.
     let start = 0;
-    let end = nums.length - 1;
+    let end = nums.length;
     let mid = Math.floor((start + end) / 2);
-    if (nums[mid] == target) {
+
+    if (nums[mid] === target) {
       return true;
     } else {
-      //if the target is less than mid point its in the 1st half.
-      if (nums[mid] < target) {
+      //if the target is less than the mid point, its in the 1st half. look left.
+      if (nums[mid] > target) {
         let leftHalf = [];
         for (let i = 0; i < mid; i++) {
           leftHalf.push(nums[i]);
         }
         return this.binarySearch(leftHalf, target);
       }
-      if (nums[mid] > target) {
+      //if the target is greater than mid point its in the 2nd half. look right.
+      if (nums[mid] < target) {
         let rightHalf = [];
-        for (let i = 0; i < mid; i++) {
+        for (let i = mid + 1; i < end; i++) {
           rightHalf.push(nums[i]);
         }
         return this.binarySearch(rightHalf, target);
       }
-
     }
-    return false
+    return false;
   }
 }
 
